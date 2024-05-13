@@ -5,18 +5,6 @@ with some additional automation wrapped around to get to a publish release on Gi
 
 Other operating systems are derived from the basic template used in Raspberry Pi OS.
 
-## Available Images
-
-* Raspberry Pi OS (`arm64` and `armhf`)
-  * Lite
-* Ubuntu (`arm64`)
-  * Server: `not working!`
-
-## Burning Your Image
-
-Since v0.2, images no longer have a default user/password. The recommened approach is to set the user/password during image burn with [Raspberry Pi Imager][rpimg].
-
-
 ## Building Images with Docker
 
 The easiest way to build images locally is to use the pre-built [`packer-builder-arm`][pba] Docker images
