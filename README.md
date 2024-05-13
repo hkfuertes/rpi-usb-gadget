@@ -10,7 +10,7 @@ Other operating systems are derived from the basic template used in Raspberry Pi
 The easiest way to build images locally is to use the pre-built [`packer-builder-arm`][pba] Docker images
 
 ```
-docker compose run [lite64|lite|ubuntu]
+docker compose run [lite64|lite]
 ```
 To use new images it should be enougth to update the urls in the `docker-compose.yaml` file.
 ```yaml
