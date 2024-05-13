@@ -16,17 +16,37 @@ Other operating systems are derived from the basic template used in Raspberry Pi
 
 Since v0.2, images no longer have a default user/password. The recommened approach is to set the user/password during image burn with [Raspberry Pi Imager][rpimg].
 
-I have a video showing how to burn and customize an image here:
-
-[![Raspberry Pi iPad Pro Setup Guide](https://img.youtube.com/vi/dUeQUCF6KPc/hqdefault.jpg
-)](https://youtu.be/dUeQUCF6KPc "Raspberry Pi iPad Pro Setup Guide")
 
 ## Building Images with Docker
 
-The easiest way to build images locally is to use the pre-built `packer-builder-arm`[pba] Docker images
+The easiest way to build images locally is to use the pre-built [`packer-builder-arm`][pba] Docker images
 
 ```
 docker compose run [lite64|lite|ubuntu]
+```
+To use new images it should be enougth to update the urls in the `docker-compose.yaml` file.
+```yaml
+...
+  lite64:
+    <<: *builder
+    environment:
+      - IMG_URL=https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2024-03-15/2024-03-15-raspios-bookworm-arm64-lite.img.xz
+      - FILENAME=raspios-lite-arm64.img
+
+  lite:
+    <<: *builder
+    environment:
+      - IMG_URL=https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2024-03-15/2024-03-15-raspios-bookworm-armhf-lite.img.xz
+      - FILENAME=raspios-lite-armhf.img
+
+  ubuntu:
+    <<: *builder
+    command: build ubuntu-server-arm64.json
+    environment:
+      - IMG_URL=https://cdimage.ubuntu.com/releases/24.04/release/ubuntu-24.04-preinstalled-server-arm64+raspi.img.xz
+      - MD5_URL=https://cdimage.ubuntu.com/releases/24.04/release/SHA256SUMS
+      - FILENAME=ubuntu-24.04--arm64.img
+...
 ```
 
 
