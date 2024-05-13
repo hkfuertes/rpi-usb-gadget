@@ -1,11 +1,14 @@
 {
+	"variables": {
+        "url": "{{env `IMG_URL`}}",
+        "md5_url": "{{env `MD5_URL`}}",
+        "image_path": "{{env `FILENAME`}}"
+    },
 	"builders": [
 		{
 			"type": "arm",
-			"file_urls": [
-				"https://cdimage.ubuntu.com/releases/22.04/release/ubuntu-22.04-preinstalled-server-arm64+raspi.img.xz"
-			],
-			"file_checksum_url": "https://cdimage.ubuntu.com/releases/22.04/release/SHA256SUMS",
+			"file_urls": ["{{user `url`}}"],
+			"file_checksum_url": "{{user `md5_url`}}",
 			"file_checksum_type": "sha256",
 			"file_target_extension": "xz",
 			"file_unarchive_cmd": [
@@ -14,7 +17,7 @@
 				"$ARCHIVE_PATH"
 			],
 			"image_build_method": "reuse",
-			"image_path": "ubuntu-server-arm64-22.04-arm64.img",
+			"image_path": "{{user `image_path`}}",
 			"image_size": "2G",
 			"image_type": "dos",
 			"image_partitions": [
@@ -47,7 +50,7 @@
 			"type": "shell",
 			"inline": [
 				"rm /etc/resolv.conf",
-				"echo 'nameserver 1.1.1.1' \u003e /etc/resolv.conf",
+				"echo 'nameserver 1.1.1.1' > /etc/resolv.conf",
 				"sudo apt update",
 				"sudo apt install -y dnsmasq avahi-daemon"
 			]
@@ -65,16 +68,21 @@
 		{
 			"type": "shell",
 			"inline": [
-				"echo '\ndtoverlay=dwc2,dr_mode=peripheral' \u003e\u003e /boot/firmware/config.txt",
+				"echo '\ndtoverlay=dwc2,dr_mode=peripheral' >> /boot/firmware/config.txt",
 				"sed -i 's/rootwait/modules-load=dwc2,g_ether rootwait/' /boot/firmware/cmdline.txt",
 				"sed -i 's/#DNSMASQ_EXCEPT/DNSMASQ_EXCEPT/' /etc/default/dnsmasq ",
-				"echo port=0 \u003e\u003e /etc/dnsmasq.conf",
-				"echo interface=usb0 \u003e\u003e /etc/dnsmasq.conf"
+				"echo port=0 >> /etc/dnsmasq.conf",
+				"echo interface=usb0 >> /etc/dnsmasq.conf"
 			]
-		},
-		{
-			"type": "shell",
-			"inline": "echo ::BUILD::SUCCESS"
 		}
-	]
+	],
+	"post-processors": [
+        {
+            "type": "compress",
+            "format": "zip",
+            "output": "{{user `image_path`}}.zip",
+            "keep_input_artifact": true,
+            "compression_level": 9
+        }
+    ]
 }

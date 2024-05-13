@@ -9,8 +9,7 @@ Other operating systems are derived from the basic template used in Raspberry Pi
 
 * Raspberry Pi OS (`arm64` and `armhf`)
   * Lite
-  * Desktop 
-* Ubuntu (`arm64` and `armhf`)
+* Ubuntu (`arm64`)
   * Server
 
 ## Burning Your Image
@@ -27,23 +26,8 @@ I have a video showing how to burn and customize an image here:
 The easiest way to build images locally is to use the pre-built `packer-builder-arm`[pba] Docker images
 
 ```
-docker run --rm --privileged -v /dev:/dev -v ${PWD}:/build mkaczanowski/packer-builder-arm build <build_json_path>
+docker compose run [lite64|lite|ubuntu]
 ```
-
-Replace `<build_json_path>` with any of the image definition files in the root directory.
-
-## Building Images with Packer directly
-
-To build you need [Packer][packer] and the `packer-builder-arm` plugin.
-To build `packer-build-arm` you need [Go][go].
-
-With Packer and `packer-builder-arm` installed:
-
-```
-sudo packer build raspios-lite-usb-gadget-arm.json
-```
-
-You can substitute any other build specification in the call to `packer build`.
 
 
 [packer]: https://www.packer.io/
