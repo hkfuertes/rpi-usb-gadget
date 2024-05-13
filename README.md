@@ -10,7 +10,7 @@ Other operating systems are derived from the basic template used in Raspberry Pi
 * Raspberry Pi OS (`arm64` and `armhf`)
   * Lite
 * Ubuntu (`arm64`)
-  * Server **not working**
+  * Server: `not working!`
 
 ## Burning Your Image
 
