@@ -45,7 +45,7 @@ To use new images it should be enougth to update the urls in the `docker-compose
     environment:
       - IMG_URL=https://cdimage.ubuntu.com/releases/24.04/release/ubuntu-24.04-preinstalled-server-arm64+raspi.img.xz
       - MD5_URL=https://cdimage.ubuntu.com/releases/24.04/release/SHA256SUMS
-      - FILENAME=ubuntu-24.04--arm64.img
+      - FILENAME=ubuntu-24.04-arm64.img
 ...
 ```
 
