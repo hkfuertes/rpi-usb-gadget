@@ -10,7 +10,7 @@ Other operating systems are derived from the basic template used in Raspberry Pi
 * Raspberry Pi OS (`arm64` and `armhf`)
   * Lite
 * Ubuntu (`arm64`)
-  * Server
+  * Server **not working**
 
 ## Burning Your Image
 
@@ -38,14 +38,6 @@ To use new images it should be enougth to update the urls in the `docker-compose
     environment:
       - IMG_URL=https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2024-03-15/2024-03-15-raspios-bookworm-armhf-lite.img.xz
       - FILENAME=raspios-lite-armhf.img
-
-  ubuntu:
-    <<: *builder
-    command: build ubuntu-server-arm64.json
-    environment:
-      - IMG_URL=https://cdimage.ubuntu.com/releases/24.04/release/ubuntu-24.04-preinstalled-server-arm64+raspi.img.xz
-      - MD5_URL=https://cdimage.ubuntu.com/releases/24.04/release/SHA256SUMS
-      - FILENAME=ubuntu-24.04-arm64.img
 ...
 ```
 
