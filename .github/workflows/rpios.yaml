@@ -28,9 +28,7 @@ jobs:
       - name: Set Variables
         run: |-
           export IMG_URL=${{matrix.version.image}}
-          echo $IMG_URL
           export FILENAME=${{matrix.version.filename}}
-          echo $FILENAME
       - name: Fetch additional packages
         run: |-
           sudo apt-get update
