@@ -27,9 +27,9 @@ jobs:
         uses: hashicorp-contrib/setup-packer@v1
       - name: Set Variables
         run: |-
-          export IMG_URL={{matrix.version.image}}
+          export IMG_URL=${{matrix.version.image}}
           echo $IMG_URL
-          export FILENAME={{matrix.version.filename}}
+          export FILENAME=${{matrix.version.filename}}
           echo $FILENAME
       - name: Fetch additional packages
         run: |-
