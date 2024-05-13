@@ -1,0 +1,46 @@
+name: Build Raspberry Pi OS Lite Images
+on:
+  workflow_dispatch:
+
+jobs:
+  build-raspios:
+    strategy:
+      matrix:
+        version:
+          lite64:
+            image: 'https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2024-03-15/2024-03-15-raspios-bookworm-arm64-lite.img.xz'
+            filename: 'raspios-lite-arm64.img'
+          lite:
+            image: 'https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2024-03-15/2024-03-15-raspios-bookworm-armhf-lite.img.xz'
+            filename: 'raspios-lite-armhf.img'
+
+    runs-on: ubuntu-latest
+    name: Run Packer
+    steps:
+      - uses: actions/setup-go@v2.1.3
+      - name: Check out repo code
+        uses: actions/checkout@v2.3.4
+      - name: Use latest Packer
+        uses: hashicorp-contrib/setup-packer@v1
+      - name: Set Variables
+        run: |-
+          export IMG_URL={{matrix.versions.image}}
+          export FILENAME={{matrix.versions.filename}}
+      - name: Fetch additional packages
+        run: |-
+          sudo apt-get update
+          sudo apt-get install tree fdisk gdisk qemu-user-static libarchive-tools psmisc tar autoconf make qemu-utils
+      - name: Get packer-build-arm plugin
+        run: |-
+          git clone https://github.com/mkaczanowski/packer-builder-arm plugin
+          cd plugin
+          go mod download
+          go build
+      - name: Build the image
+        run: |-
+          cp plugin/packer-builder-arm .
+          sudo -E packer build raspios-lite.json
+      - uses: actions/upload-artifact@v4
+        id: upload
+        with:
+          path: '*.img'
