@@ -4,4 +4,4 @@ network:
     usb0:
       dhcp4: false
       optional: true
-      addresses: [10.55.0.1/29]
+      addresses: [10.55.0.1/24]
