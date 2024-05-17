@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Typical location of this file is /usr/local/bin
+# Typical location of this file is /usr/local/bin/gadget
 
 # USB Gadget for Raspbery Pi 4 Ethernet-over-USB
 #

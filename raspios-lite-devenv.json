@@ -66,10 +66,22 @@
             "destination": "/etc/network/interfaces.d/usb0"
         },
         {
+            "type": "file",
+            "source": "sources//gadget.sh",
+            "destination": "/usr/local/bin/gadget"
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "# Convert this into a Service!",
+                "echo '/usr/local/bin/gadget up' > /etc/rc.local"
+            ]
+        },
+        {
             "type": "shell",
             "inline": [
                 "echo dtoverlay=dwc2,dr_mode=peripheral >> /boot/config.txt",
-                "sed -i 's/$/ modules-load=dwc2,g_ether/' /boot/cmdline.txt",
+                "sed -i 's/$/ modules-load=dwc2,libcomposite/' /boot/cmdline.txt",
                 "echo denyinterfaces usb0 >> /etc/dhcpcd.conf"
             ]
         },
