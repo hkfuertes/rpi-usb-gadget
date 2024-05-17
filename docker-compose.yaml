@@ -34,14 +34,5 @@ services:
       - IMG_URL=https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2021-05-28/2021-05-07-raspios-buster-arm64-lite.zip
       - FILENAME=raspios-lite-buster64-arm64.img
 
-  # ubuntu:
-  #   <<: *builder
-  #   command: build ubuntu-server-arm64.json
-  #   environment:
-  #     - IMG_URL=https://cdimage.ubuntu.com/releases/24.04/release/ubuntu-24.04-preinstalled-server-arm64+raspi.img.xz
-  #     - MD5_URL=https://cdimage.ubuntu.com/releases/24.04/release/SHA256SUMS
-  #     - FILENAME=ubuntu-24.04-arm64.img
-    
-
 
    

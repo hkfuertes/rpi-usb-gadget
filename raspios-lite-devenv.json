@@ -73,7 +73,7 @@
         {
             "type": "shell",
             "inline": [
-                "# Convert this into a Service!",
+                "chmod +x /usr/local/bin/gadget",
                 "echo '/usr/local/bin/gadget up' > /etc/rc.local"
             ]
         },
@@ -81,7 +81,8 @@
             "type": "shell",
             "inline": [
                 "echo dtoverlay=dwc2,dr_mode=peripheral >> /boot/config.txt",
-                "sed -i 's/$/ modules-load=dwc2,libcomposite/' /boot/cmdline.txt",
+                "sed -i '${s/$/ modules-load=dwc2/}' /boot/cmdline.txt",
+                "echo libcomposite >> /etc/modules",
                 "echo denyinterfaces usb0 >> /etc/dhcpcd.conf"
             ]
         },

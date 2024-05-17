@@ -29,6 +29,29 @@ To use new images it should be enougth to update the urls in the `docker-compose
 ...
 ```
 
+## Disable UASP
+Several SATA to USB adapter (I've got two) have their UASP chip/protocol not compatible with Raspberry PI. We can disable it for those specific devices.
+> https://www.raspberrypi.org/forums/viewtopic.php?f=28&t=245931
+
+After running `lsusb` you will see an output similar to this:
+```console
+hkfuertes@terminus:~$ lsusb
+...            
+Bus 001 Device 016: ID 174c:1153 ASMedia Technology Inc. ASM1153 SATA 3Gb/s bridge
+...
+```
+We need on the second line **idVendor** and **idProduct**: *174c* and *1153*.
+
+Then we modify the `/boot/cmdline.txt` file (`sudo nano /boot/cmdline.txt`) and we add in the begining the following string: 
+```console
+usb-storage.quirks=174c:1153:u
+```
+  > If we have several devices separate the multiple `idVendor:idProduct:u` with a comma.
+
+### My Adapters Strings:
+- `usb-storage.quirks=152d:0578:u`: JMicron Technology Corp. / JMicron USA Technology Corp. JMS578 SATA 6Gb/s
+- `usb-storage.quirks=174c:1153:u`: ASMedia Technology Inc. ASM1153 SATA 3Gb/s bridge
+
 
 [packer]: https://www.packer.io/
 [pba]: https://github.com/mkaczanowski/packer-builder-arm
