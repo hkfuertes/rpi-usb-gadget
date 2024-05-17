@@ -27,13 +27,7 @@ services:
       - IMG_URL=https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2024-03-15/2024-03-15-raspios-bookworm-armhf-lite.img.xz
       - FILENAME=raspios-lite-armhf.img
 
-  bullseye64:
-    <<: *builder
-    environment:
-      - IMG_URL=https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2023-05-03/2023-05-03-raspios-bullseye-arm64-lite.img.xz
-      - FILENAME=raspios-lite-bullseye-arm64.img
-
-  buster64:
+  buster-lite64:
     <<: *builder
     command: build raspios-lite-buster.json
     environment:
