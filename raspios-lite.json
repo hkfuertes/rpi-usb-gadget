@@ -68,10 +68,9 @@
         {
             "type": "shell",
             "inline": [
-                "curl -fsSL https://get.docker.com -o get-docker.sh",
-"sh get-docker.sh",
-"sudo usermod -aG docker $USER",
-"sudo systemctl enable docker"
+                "echo dtoverlay=dwc2,dr_mode=peripheral >> /boot/config.txt",
+                "sed -i 's/$/ modules-load=dwc2,g_ether/' /boot/cmdline.txt",
+                "echo denyinterfaces usb0 >> /etc/dhcpcd.conf"
             ]
         }
     ],

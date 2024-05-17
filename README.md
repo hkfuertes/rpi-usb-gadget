@@ -51,6 +51,7 @@ usb-storage.quirks=174c:1153:u
 ### My Adapters Strings:
 - `usb-storage.quirks=152d:0578:u`: JMicron Technology Corp. / JMicron USA Technology Corp. JMS578 SATA 6Gb/s
 - `usb-storage.quirks=174c:1153:u`: ASMedia Technology Inc. ASM1153 SATA 3Gb/s bridge
+- `usb-storage.quirks=03f0:0c5b:u`: HP, Inc x5600c (USB 3.2 Pendrive)
 
 
 [packer]: https://www.packer.io/
