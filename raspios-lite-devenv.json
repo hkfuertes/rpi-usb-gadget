@@ -66,23 +66,11 @@
             "destination": "/etc/network/interfaces.d/usb0"
         },
         {
-            "type": "file",
-            "source": "sources//gadget.sh",
-            "destination": "/usr/local/bin/gadget"
-        },
-        {
-            "type": "shell",
-            "inline": [
-                "chmod +x /usr/local/bin/gadget",
-                "echo '/usr/local/bin/gadget up' > /etc/rc.local"
-            ]
-        },
-        {
             "type": "shell",
             "inline": [
                 "echo dtoverlay=dwc2,dr_mode=peripheral >> /boot/config.txt",
-                "sed -i '${s/$/ modules-load=dwc2/}' /boot/cmdline.txt",
-                "echo libcomposite >> /etc/modules",
+                "echo usb_max_current_enable=1 >> /boot/config.txt",
+                "sed -i 's/$/ modules-load=dwc2,g_ether/' /boot/cmdline.txt",
                 "echo denyinterfaces usb0 >> /etc/dhcpcd.conf"
             ]
         },
