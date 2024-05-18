@@ -68,6 +68,13 @@
         {
             "type": "shell",
             "inline": [
+                "# Install rpi-clone",
+                "curl https://raw.githubusercontent.com/geerlingguy/rpi-clone/master/install | sudo bash"
+            ]
+        },
+        {
+            "type": "shell",
+            "inline": [
                 "echo dtoverlay=dwc2,dr_mode=peripheral >> /boot/config.txt",
                 "echo usb_max_current_enable=1 >> /boot/config.txt",
                 "sed -i 's/$/ modules-load=dwc2,g_ether/' /boot/cmdline.txt",

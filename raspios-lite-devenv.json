@@ -52,8 +52,14 @@
             "type": "shell",
             "inline": [
                 "sudo apt update",
-                "sudo apt install -y dnsmasq"
+                "sudo apt upgrade -y",
+                "sudo apt install -y dnsmasq samba"
             ]
+        },
+        {
+            "type": "file",
+            "source": "sources//etc/samba/smb.conf",
+            "destination": "/etc/samba/smb.conf"
         },
         {
             "type": "file",
@@ -64,6 +70,13 @@
             "type": "file",
             "source": "sources//etc/network/interfaces.d/usb0",
             "destination": "/etc/network/interfaces.d/usb0"
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "# Install rpi-clone",
+                "curl https://raw.githubusercontent.com/geerlingguy/rpi-clone/master/install | sudo bash"
+            ]
         },
         {
             "type": "shell",

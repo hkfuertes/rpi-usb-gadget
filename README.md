@@ -55,10 +55,12 @@ usb-storage.quirks=174c:1153:u
 
 ## Manual Steps First boot for `devenv`
 ```shell
-# Run docer non root
+# Run docker non root
 sudo usermod -aG docker $USER
-# Enable codeserver for the current user
+# Enable code-server for the current user
 sudo systemctl enable --now code-server@$USER
+# Add user to samba
+sudo smbpasswd -a $USER
 ```
 
 
