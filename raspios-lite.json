@@ -76,7 +76,6 @@
             "type": "shell",
             "inline": [
                 "echo dtoverlay=dwc2,dr_mode=peripheral >> /boot/config.txt",
-                "echo usb_max_current_enable=1 >> /boot/config.txt",
                 "sed -i 's/$/ modules-load=dwc2,g_ether/' /boot/cmdline.txt",
                 "echo denyinterfaces usb0 >> /etc/dhcpcd.conf"
             ]
